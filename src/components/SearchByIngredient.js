@@ -24,18 +24,18 @@ const SearchIngredient = {
     },
     methods : {
         //!FETCH API
-        searchByIngredient() {
+        async searchByIngredient() {
             // condition if the user has selected ingredient
             if(this.selectedOption){
                 // fetch with the selected option 
-                fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + this.selectedOption)
+                await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + this.selectedOption)
                 .then(
                     (response) => {
-                        response.json().then((data) => {
+                        response.json().then(async(data) => {
                             let tabIngredient = data.drinks
                             // loop : select each cocktail with idDrink 
                             for (let i = 0; i < tabIngredient.length; i++) {
-                                fetch("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + tabIngredient[i]["idDrink"])
+                                await fetch("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + tabIngredient[i]["idDrink"])
                                     .then(
                                         (response) => {
                                             response.json().then((data) => {

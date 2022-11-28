@@ -9,11 +9,6 @@ const SearchRandom = {
     </aside>
     `,
     emit : ["result"],
-    data() {
-        return { 
-            idSoftCocktail : 0,
-        };
-    },
     methods : {
         //!FETCH API
         randomCocktailAlcoholic(){
@@ -29,7 +24,16 @@ const SearchRandom = {
             fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=non_alcoholic").then(
                 (response) => {
                     response.json().then((data) => {
-                        console.log(data)
+                        let randNumber = Math.floor(Math.random() * 57)
+                        let idSoftCocktail = data.drinks[randNumber]
+                        fetch("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + idSoftCocktail["idDrink"])
+                        .then(
+                            (response) => {
+                                response.json().then((data) => {
+                                    this.$emit("result", data.drinks)
+                                })
+                            }
+                        )
                     });
                 }
             );     
