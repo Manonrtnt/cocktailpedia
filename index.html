@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./src/asset/favicon.png"/>
+    <!--!vue js-->
+    <script defer src="https://unpkg.com/vue@3.2.45/dist/vue.global.js"></script>
+    <!--!router vue js-->
+    <script defer src="https://unpkg.com/vue-router@4"></script>
+    <!--!module js-->
+    <script defer src="./src/main.js" type="module"></script>
+    <!--!mvp css-->
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <!--!fontawesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <title>Cocktailpedia</title>
+</head>
+<body>
+    <main id="app" style="padding-top: 0;">
+        <main-menu></main-menu>
+        <App></App>
+        <section>
+            <search-name @result="setResult"></search-name>
+            <search-ingredient :ingredients="ingredients" @result="setResult"></search-ingredient>
+            <search-random @result="setResult"></search-random>
+        </section>
+        <article>
+            <aside>
+                <!--? message management -->
+                <p v-if="!this.dataCocktail.length">{{displayMessage}}</p>
+                <!--? count results -->
+                <p v-else-if="this.dataCocktail.length == 1">{{dataCocktail.length}} Result</p>
+                <p v-else>{{dataCocktail.length}} Results</p>
+            </aside>
+        </article>
+        <section>
+            <display-cocktail :data-cocktail="dataCocktail"></display-cocktail>
+        </section>
+    </main>
+</body>
+</html>
