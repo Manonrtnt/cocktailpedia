@@ -9,9 +9,10 @@ const DisplayCocktail = {
             <li v-for="index in ingredientList(data)">{{index}}</li>
         </ul>
     </aside>`,
-    
+    // props : retrieve dataCocktail from parent component 
     props: ["dataCocktail"],
     methods : {
+        // add and sort ingredients in tab (remove null elements)
         ingredientList(data){
             let tabIngredient = [];
             for (let i=1; i<=15; i++){
